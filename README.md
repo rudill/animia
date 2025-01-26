@@ -1,6 +1,6 @@
-# animia
+# Animia
 
-A new Flutter project.
+My new Flutter project for customized anime tracker.
 
 ## Getting Started
 
