@@ -13,3 +13,20 @@ String query = r'''
   }
 } ''';
 
+String searchQuery = r''' 
+  query ($search: String) {
+    Media(type: ANIME, search: $search) {
+        coverImage {
+            large
+            extraLarge
+            color
+        }
+        title {
+            romaji
+            english
+            native
+        }
+    }
+}
+
+''';
