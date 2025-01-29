@@ -26,6 +26,7 @@ String searchQuery = r'''
             english
             native
         }
+        description
     }
 }
 

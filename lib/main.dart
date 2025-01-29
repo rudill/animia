@@ -6,14 +6,16 @@ void main() {
   runApp(const MyApp());
 }
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: animaMainScreen(aniName: 'one piece',)
+    return MaterialApp(
+      theme: ThemeData(brightness: Brightness.dark),
+      home: const animaMainScreen(
+        aniName: 'chainsaw man',
+      ),
     );
   }
 }
