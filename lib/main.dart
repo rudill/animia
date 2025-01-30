@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(brightness: Brightness.dark),
       home: const animaMainScreen(
-        aniName: 'chainsaw man',
+        aniName: 'jujutsu kaisen',
       ),
     );
   }
