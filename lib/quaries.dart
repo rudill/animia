@@ -13,7 +13,7 @@ String query = r'''
   }
 } ''';
 
-String searchQuery = r''' 
+String singleSearchQuery = r''' 
   query ($search: String) {
     Media(type: ANIME, search: $search) {
         coverImage {
@@ -29,5 +29,27 @@ String searchQuery = r'''
         description
     }
 }
+
+''';
+
+String searchQueryForPages = r''' 
+  query ($id: Int, $page: Int, $perPage: Int, $search: String) {
+    Page(page: $page, perPage: $perPage) {
+        pageInfo {
+            perPage
+            currentPage
+            hasNextPage
+        }
+        media(id: $id, search: $search, type: ANIME) {
+            title {
+                romaji
+                english
+                native
+                userPreferred
+            }
+        }
+    }
+}
+
 
 ''';
