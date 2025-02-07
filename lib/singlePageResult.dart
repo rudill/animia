@@ -14,8 +14,7 @@ SingleChildScrollView singlePageSearchResult(data) {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image.network(
-                data['coverImage']['extraLarge'] ??
-                    data['coverImage']['large'],
+                data['coverImage']['extraLarge'] ?? data['coverImage']['large'],
               ),
             ),
           ),
@@ -54,7 +53,6 @@ SingleChildScrollView singlePageSearchResult(data) {
           child: Container(
             // width: 347,
             // height: 60,
-
 
             child: Center(
               child: Align(

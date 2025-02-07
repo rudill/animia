@@ -47,8 +47,17 @@ String searchQueryForPages = r'''
                 native
                 userPreferred
             }
+            
+              coverImage {
+                extraLarge
+                large
+                medium
+                color
+          }
         }
     }
+    
+    
 }
 
 

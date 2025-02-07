@@ -1,14 +1,101 @@
+import 'package:animia/quaries.dart';
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'graphql_config.dart';
 
-Widget buildSearchResults() {
+class searchAnime extends StatelessWidget {
+  final String aniName;
+  final int page;
+  final int perPage;
+
+  const searchAnime(
+      {super.key,
+      required this.aniName,
+      required this.page,
+      required this.perPage});
+
+  @override
+  Widget build(BuildContext context) {
+    return GraphQLProvider(
+      client: ValueNotifier(GraphQLConfig.client()),
+      child: Scaffold(
+        body: Query(
+            options: QueryOptions(
+              document: gql(searchQueryForPages),
+              variables: {'search': aniName},
+            ),
+            builder: (QueryResult result, {refetch, fetchMore}) {
+              if (result.isLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (result.hasException) {
+                return Center(child: Text(result.exception.toString()));
+              }
+
+              final data = result.data?['Page']['media'];
+              if (data == null) {
+                return const Center(child: Text('No data found'));
+              }
+
+              return buildSearchResults(data, perPage);
+            }),
+      ),
+    );
+  }
+}
+
+Widget buildSearchResults(data, perPage) {
   return ListView.builder(
-    itemCount: 3,
+    itemCount: data.length,
     itemBuilder: (BuildContext context, index) {
-      return const ListTile(
-        title: Text(
-          "hello"
-        ),
-      );
+      return animeCards(data, index);
     },
+  );
+}
+
+Column animeCards(data, int index) {
+  return Column(
+    children: [
+      Container(
+        padding: const EdgeInsets.all(12),
+        margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+        height: 270.0,
+        width: 190.0,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 5,
+              spreadRadius: 2,
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              child: ClipRRect(
+                child: Image.network(
+                  data[index]['coverImage']['large'],
+                  width: 150,
+                  height: 200,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              data[index]['title']['romaji'],
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+            ),
+          ],
+        ),
+      ),
+    ],
   );
 }

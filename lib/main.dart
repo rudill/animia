@@ -1,3 +1,4 @@
+import 'package:animia/searchAnime.dart';
 import 'package:flutter/material.dart';
 
 import 'mainScreen.dart';
@@ -13,8 +14,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(brightness: Brightness.dark),
-      home: const animaMainScreen(
-        aniName: 'jujutsu kaisen',
+      // home: const animaMainScreen(
+      //   aniName: 'Attack on titan',
+      // ),
+      home: const searchAnime(
+        aniName: 'Attack on titan',
+        page: 1,
+        perPage: 10,
       ),
     );
   }
