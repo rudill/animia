@@ -53,8 +53,12 @@ String searchQueryForPages = r'''
                 large
                 medium
                 color
-          }
-        }
+            }
+            status
+            description(asHtml:false)
+            genres
+            averageScore
+        } 
     }
     
     

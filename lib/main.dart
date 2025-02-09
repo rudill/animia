@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
       // home: const animaMainScreen(
       //   aniName: 'Attack on titan',
       // ),
-      home: const searchAnime(
-        aniName: 'Attack on titan',
+      home:  const searchAnime(
+        aniName: 'solo leveling',
         page: 1,
         perPage: 10,
       ),

@@ -61,8 +61,8 @@ Column animeCards(data, int index) {
       Container(
         padding: const EdgeInsets.all(12),
         margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
-        height: 270.0,
-        width: 190.0,
+        // height: 270.0,
+        // width: 190.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           boxShadow: const [
@@ -73,26 +73,89 @@ Column animeCards(data, int index) {
             ),
           ],
         ),
-        child: Column(
+        child: Row(
           children: [
-            SizedBox(
-              child: ClipRRect(
-                child: Image.network(
-                  data[index]['coverImage']['large'],
-                  width: 150,
-                  height: 200,
+            Column(
+              children: [
+                SizedBox(
+                  child: Image.network(
+                    data[index]['coverImage']['large'],
+                    width: 150,
+                    height: 200,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ],
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            data[index]['title']['romaji'],
+                            style: const TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w500),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          data[index]['status'] ?? 'TBA',
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        for (var genre in data[index]['genres'])
+                          Expanded(
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                backgroundColor: Colors.black,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              onPressed: () {},
+                              child: Text(
+                                genre ?? 'N/A',
+                                style: const TextStyle(
+                                    fontSize: 10, fontWeight: FontWeight.w500),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 3,
+                              ),
+                            ),
+                          )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          data[index]['averageScore'].toString(),
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              data[index]['title']['romaji'],
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-            ),
+            )
           ],
         ),
       ),
