@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       //   aniName: 'Attack on titan',
       // ),
       home:  const searchAnime(
-        aniName: 'solo leveling',
+        aniName: 'demon slayer',
         page: 1,
         perPage: 10,
       ),

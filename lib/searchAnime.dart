@@ -2,6 +2,7 @@ import 'package:animia/quaries.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'graphql_config.dart';
+import 'hexColorConverter.dart';
 
 class searchAnime extends StatelessWidget {
   final String aniName;
@@ -80,8 +81,8 @@ Column animeCards(data, int index) {
                 SizedBox(
                   child: Image.network(
                     data[index]['coverImage']['large'],
-                    width: 150,
-                    height: 200,
+                    width: 120,
+                    height: 170,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -105,53 +106,66 @@ Column animeCards(data, int index) {
                         ),
                       ],
                     ),
-                    Row(
+                    // Row(
+                    //   children: [
+                    //     Text(
+                    //       data[index]['status'] ?? 'TBA',
+                    //       style: const TextStyle(
+                    //           fontSize: 16, fontWeight: FontWeight.w500),
+                    //       overflow: TextOverflow.ellipsis,
+                    //       maxLines: 3,
+                    //     ),
+                    //   ],
+                    // ),
+                    Column(
                       children: [
-                        Text(
-                          data[index]['status'] ?? 'TBA',
-                          style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        for (var genre in data[index]['genres'])
-                          Expanded(
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                foregroundColor: Colors.white,
-                                backgroundColor: Colors.black,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            for (var genre in data[index]['genres'].take(2))
+                              Padding(
+                                padding: const EdgeInsets.only(right: 5),
+                                child: Chip(
+                                  label: Text(genre),
+                                  backgroundColor: HexColor(
+                                          colorValue: data[index]['coverImage']
+                                                  ['color'] ??
+                                              '#FFFFFF')
+                                      .parseHexColor(),
                                 ),
                               ),
-                              onPressed: () {},
-                              child: Text(
-                                genre ?? 'N/A',
-                                style: const TextStyle(
-                                    fontSize: 10, fontWeight: FontWeight.w500),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 3,
-                              ),
-                            ),
-                          )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          data[index]['averageScore'].toString(),
-                          style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
+                          ],
                         ),
+                        if (data[index]['genres'].length > 2)
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 5),
+                                child: Chip(
+                                  label: Text(data[index]['genres'][2]),
+                                  backgroundColor: HexColor(
+                                          colorValue: data[index]['coverImage']
+                                                  ['color'] ??
+                                              '#FFFFFF')
+                                      .parseHexColor(),
+                                ),
+                              ),
+                            ],
+                          ),
                       ],
                     ),
+                    // Row(
+                    //   children: [
+                    //     Text(
+                    //       data[index]['averageScore'].toString(),
+                    //       style: const TextStyle(
+                    //           fontSize: 16, fontWeight: FontWeight.w500),
+                    //       overflow: TextOverflow.ellipsis,
+                    //       maxLines: 3,
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),
