@@ -1,10 +1,10 @@
-import 'package:animia/graphql_config.dart';
-import 'package:animia/quaries.dart';
-import 'package:animia/singlePageResult.dart';
+import 'package:animia/graphqlFiles/graphql_config.dart';
+import 'package:animia/graphqlFiles/quaries.dart';
+import 'package:animia/UI/singlePageResult.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-import 'graphqlProvider.dart';
+import '../graphqlFiles/graphqlProvider.dart';
 
 class animaMainScreen extends StatelessWidget {
   //final int aniId;

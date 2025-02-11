@@ -1,5 +1,5 @@
-import 'package:animia/quaries.dart';
-import 'package:animia/singlePageResult.dart';
+import 'package:animia/graphqlFiles/quaries.dart';
+import 'package:animia/UI/singlePageResult.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
