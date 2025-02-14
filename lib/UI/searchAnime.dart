@@ -102,7 +102,6 @@ Widget buildSearchResults(data) {
 }
 
 Column animeCards(data, int index, BuildContext context) {
-
   return Column(
     children: [
       GestureDetector(
@@ -110,7 +109,10 @@ Column animeCards(data, int index, BuildContext context) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => DescriptionScreen( title: data[index]['title']['romaji']),
+              builder: (context) => DescriptionScreen(
+                title: data[index]['title']['romaji'],
+                description: data[index]['description'],
+              ),
             ),
           );
         },
@@ -183,8 +185,8 @@ Column animeCards(data, int index, BuildContext context) {
                                   child: Chip(
                                     label: Text(genre),
                                     backgroundColor: HexColor(
-                                            colorValue: data[index]['coverImage']
-                                                    ['color'] ??
+                                            colorValue: data[index]
+                                                    ['coverImage']['color'] ??
                                                 '#FFFFFF')
                                         .parseHexColor(),
                                   ),
@@ -200,8 +202,8 @@ Column animeCards(data, int index, BuildContext context) {
                                   child: Chip(
                                     label: Text(data[index]['genres'][2]),
                                     backgroundColor: HexColor(
-                                            colorValue: data[index]['coverImage']
-                                                    ['color'] ??
+                                            colorValue: data[index]
+                                                    ['coverImage']['color'] ??
                                                 '#FFFFFF')
                                         .parseHexColor(),
                                   ),

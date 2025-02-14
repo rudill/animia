@@ -1,20 +1,20 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DescriptionScreen extends StatelessWidget {
 
   final String title;
+  final String description;
 
-  const DescriptionScreen({super.key, required this.title});
+  const DescriptionScreen({super.key, required this.title, required this.description});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Description'),
+        title:  Text(title),
       ),
       body:  Center(
-        child: Text(title),
+        child: Text(description),
       ),
     );
   }
