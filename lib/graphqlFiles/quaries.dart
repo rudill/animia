@@ -54,10 +54,14 @@ String searchQueryForPages = r'''
                 medium
                 color
             }
+            
+            
             status
             description(asHtml:false)
             genres
             averageScore
+            
+            
         } 
     }
     
@@ -66,3 +70,30 @@ String searchQueryForPages = r'''
 
 
 ''';
+
+
+String trendingAnime = r'''
+
+  
+  query ($page: Int, $perPage: Int) {
+      Page(page: $page, perPage: $perPage) {
+          media(sort: TRENDING_DESC, type: ANIME) {
+              id
+              title {
+                  romaji
+                  english
+                  native
+              }
+              coverImage {
+                  large
+                  color
+              }
+              description
+              genres
+              averageScore
+          }
+      }
+  }
+
+
+ ''';

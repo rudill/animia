@@ -112,6 +112,7 @@ Column animeCards(data, int index, BuildContext context) {
               builder: (context) => DescriptionScreen(
                 title: data[index]['title']['romaji'],
                 description: data[index]['description'],
+                image: data[index]['coverImage']['large'],
               ),
             ),
           );

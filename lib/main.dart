@@ -1,6 +1,7 @@
 import 'package:animia/UI/searchAnime.dart';
 import 'package:flutter/material.dart';
 
+import 'UI/homeScreen.dart';
 import 'UI/mainScreen.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(brightness: Brightness.dark),
       home: const Scaffold(
         body:
-        SearchAnime(),
+        HomeScreen(),
       )
 
       // const searchAnime(
