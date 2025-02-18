@@ -66,6 +66,7 @@ class _SearchAnimeState extends State<SearchAnime> {
           ),
         ),
         body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
           child: Column(
             children: [
               Query(
@@ -135,6 +136,7 @@ Widget buildSearchResults(data) {
     //height: 200,
     child: ListView.builder(
       shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: data.length,
       itemBuilder: (BuildContext context, index) {
         return animeCards(data, index, context);
