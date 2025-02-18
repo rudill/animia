@@ -7,23 +7,22 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:animia/main.dart'; // Adjust the import to your main app file
+import 'package:animia/UI/homeScreen.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('SearchAnime widget test', (WidgetTester tester) async {
+    // Build the SearchAnime widget and trigger a frame.
+    await tester.pumpWidget(const MaterialApp(home: SearchAnime()));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify that the search field is present.
+    expect(find.byType(TextField), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    // Enter a search query and trigger a search.
+    await tester.enterText(find.byType(TextField), 'Naruto');
+    await tester.tap(find.byIcon(Icons.search));
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verify that the search results are displayed.
+    expect(find.text('Naruto'), findsWidgets);
   });
 }
