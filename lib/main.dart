@@ -1,16 +1,21 @@
 import 'package:animia/UI/homeScreen.dart';
 import 'package:flutter/material.dart';
-
-import 'UI/trendingAnime.dart';
-import 'UI/mainScreen.dart';
+//
+// import 'UI/trendingAnime.dart';
+// import 'UI/mainScreen.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,11 +25,7 @@ class MyApp extends StatelessWidget {
         SearchAnime(),
       )
 
-      // const searchAnime(
-      //   aniName: 'Attack on titan',
-      //   page: 1,
-      //   perPage: 10,
-      // ),
+
     );
   }
 }

@@ -7,8 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:animia/main.dart';
+import 'package:animia/main.dart'; // Adjust the import to your main app file
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
