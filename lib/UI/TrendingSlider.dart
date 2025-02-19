@@ -163,16 +163,20 @@ Widget sliderItem(data, int index) {
             Positioned(
               bottom: 10,
               left: 10,
-              child: Text(
-                data[index]['title']['english'] ??
-                    data[index]['title']['romaji'],
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              child: Center(
+                child: Text(
+                  data[index]['title']['english'] ??
+                      data[index]['title']['romaji'],
+                  style: const TextStyle(
+
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+
                 ),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
               ),
             ),
           ],
