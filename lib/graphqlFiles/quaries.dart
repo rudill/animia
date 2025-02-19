@@ -87,6 +87,7 @@ String trendingAnime = r'''
               coverImage {
                   large
                   color
+                  extraLarge
               }
               description
               genres

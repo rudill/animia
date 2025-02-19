@@ -12,7 +12,7 @@ import 'package:animia/UI/homeScreen.dart';
 void main() {
   testWidgets('SearchAnime widget test', (WidgetTester tester) async {
     // Build the SearchAnime widget and trigger a frame.
-    await tester.pumpWidget(const MaterialApp(home: SearchAnime()));
+    await tester.pumpWidget(const MaterialApp(home: HomeScreen()));
 
     // Verify that the search field is present.
     expect(find.byType(TextField), findsOneWidget);

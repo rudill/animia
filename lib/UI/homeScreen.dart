@@ -6,8 +6,8 @@ import 'descriptionScreen.dart';
 import 'hexColorConverter.dart';
 import 'trendingAnime.dart';
 
-class SearchAnime extends StatefulWidget {
-  const SearchAnime({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   // final String aniName;
   // final int page;
@@ -20,10 +20,10 @@ class SearchAnime extends StatefulWidget {
   //     required this.perPage});
 
   @override
-  State<SearchAnime> createState() => _SearchAnimeState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _SearchAnimeState extends State<SearchAnime> {
+class _HomeScreenState extends State<HomeScreen> {
   late TextEditingController _searchController;
   String _searchQuery = '';
 
@@ -50,48 +50,48 @@ class _SearchAnimeState extends State<SearchAnime> {
     return GraphQLProvider(
       client: ValueNotifier(GraphQLConfig.client()),
       child: Scaffold(
-        appBar: AppBar(
-          title: TextField(
-            controller: _searchController,
-            decoration: InputDecoration(
-              hintText: 'Search Anime',
-              suffixIcon: IconButton(
-                icon: const Icon(Icons.search),
-                onPressed: performSearching,
-              ),
-            ),
-            onSubmitted: (value) {
-              performSearching();
-            },
-          ),
-        ),
+        // appBar: AppBar(
+        //   title: TextField(
+        //     controller: _searchController,
+        //     decoration: InputDecoration(
+        //       hintText: 'Search Anime',
+        //       suffixIcon: IconButton(
+        //         icon: const Icon(Icons.search),
+        //         onPressed: performSearching,
+        //       ),
+        //     ),
+        //     onSubmitted: (value) {
+        //       performSearching();
+        //     },
+        //   ),
+        // ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              Query(
-                options: QueryOptions(
-                  document: gql(searchQueryForPages),
-                  variables: {'search': _searchQuery},
-                ),
-                builder: (QueryResult result, {refetch, fetchMore}) {
-                  if (result.isLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  if (result.hasException) {
-                    return Center(child: Text(result.exception.toString()));
-                  }
-
-                  final data = result.data?['Page']['media'];
-                  if (data == null) {
-                    return const Center(child: Text('No data found'));
-                  }
-
-                  return buildSearchResults(data);
-                },
-              ),
+              // Query(
+              //   options: QueryOptions(
+              //     document: gql(searchQueryForPages),
+              //     variables: {'search': _searchQuery},
+              //   ),
+              //   builder: (QueryResult result, {refetch, fetchMore}) {
+              //     if (result.isLoading) {
+              //       return const Center(
+              //         child: CircularProgressIndicator(),
+              //       );
+              //     }
+              //     if (result.hasException) {
+              //       return Center(child: Text(result.exception.toString()));
+              //     }
+              //
+              //     final data = result.data?['Page']['media'];
+              //     if (data == null) {
+              //       return const Center(child: Text('No data found'));
+              //     }
+              //
+              //     return buildSearchResults(data);
+              //   },
+              // ),
               const Text(
                 'Trending Anime',
                 style: TextStyle(
