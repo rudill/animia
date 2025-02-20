@@ -61,6 +61,12 @@ String searchQueryForPages = r'''
             genres
             averageScore
             
+            nextAiringEpisode {
+                airingAt
+                timeUntilAiring
+                episode
+            }
+            
             
         } 
     }

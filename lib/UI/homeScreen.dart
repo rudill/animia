@@ -123,6 +123,30 @@ class _HomeScreenState extends State<HomeScreen> {
                   return buildTrendingResults(data);
                 },
               ),
+
+              Query(
+                options: QueryOptions(
+                  document: gql(trendingAnime),
+                  variables: {"page": 1, "perPage": 10},
+                ),
+                builder: (QueryResult result, {refetch, fetchMore}) {
+                  if (result.isLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (result.hasException) {
+                    return Center(child: Text(result.exception.toString()));
+                  }
+
+                  final data = result.data?['Page']['media'];
+                  if (data == null) {
+                    return const Center(child: Text('No data found'));
+                  }
+
+                  return buildTrendingResults(data);
+                },
+              ),
             ],
           ),
         ),

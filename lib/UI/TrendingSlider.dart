@@ -1,5 +1,8 @@
+// THIS IS HOME
+
 import 'dart:async';
 
+import 'package:animia/UI/trendingAnime.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
@@ -40,7 +43,7 @@ class _TrendingSliderState extends State<TrendingSlider>
           _pageController.animateToPage(
             _currentPage,
             duration: const Duration(milliseconds: 1000),
-            curve: Curves.easeInOut ,
+            curve: Curves.easeInOut,
           );
         }
 
@@ -65,6 +68,9 @@ class _TrendingSliderState extends State<TrendingSlider>
         body: SingleChildScrollView(
           child: Column(
             children: [
+              const SizedBox(
+                height: 20,
+              ),
               Query(
                 options: QueryOptions(
                   document: gql(trendingAnime),
@@ -85,33 +91,60 @@ class _TrendingSliderState extends State<TrendingSlider>
                     return const Center(child: Text('No data found'));
                   }
 
-                  return SizedBox(
-                    height: 500.0,
-                    child: PageView.builder(
-                      controller: _pageController,
-                      itemCount: data.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return AnimatedBuilder(
-                          animation: _animationController,
-                          builder: (context, child) {
-                            return Transform.translate(
-                              offset: Tween<Offset>(
-                                begin: const Offset(0, 0),
-                                end: const Offset(0, 0),
-                              ).animate(_animationController).value,
-                              child: child,
-                            );
-                          },
-                          child: sliderItem(data, index),
-                        );
-                      },
-                    ),
-                  );
+                  return buildSizedBox(data);
+                },
+              ),
+              Query(
+                options: QueryOptions(
+                  document: gql(trendingAnime),
+                  variables: const {"page": 1, "perPage": 10},
+                ),
+                builder: (QueryResult result, {refetch, fetchMore}) {
+                  if (result.isLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (result.hasException) {
+                    return Center(child: Text(result.exception.toString()));
+                  }
+
+                  final data = result.data?['Page']['media'];
+                  if (data == null) {
+                    return const Center(child: Text('No data found'));
+                  }
+
+                  return buildTrendingResults(data);
                 },
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  SizedBox buildSizedBox(data) {
+    return SizedBox(
+      height: 500.0,
+      child: PageView.builder(
+        controller: _pageController,
+        itemCount: data.length,
+        itemBuilder: (BuildContext context, int index) {
+          return AnimatedBuilder(
+            animation: _animationController,
+            builder: (context, child) {
+              return Transform.translate(
+                offset: Tween<Offset>(
+                  begin: const Offset(0, 0),
+                  end: const Offset(0, 0),
+                ).animate(_animationController).value,
+                child: child,
+              );
+            },
+            child: sliderItem(data, index),
+          );
+        },
       ),
     );
   }
@@ -168,14 +201,12 @@ Widget sliderItem(data, int index) {
                   data[index]['title']['english'] ??
                       data[index]['title']['romaji'],
                   style: const TextStyle(
-
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
-
                 ),
               ),
             ),
