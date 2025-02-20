@@ -73,7 +73,8 @@ Widget buildTrendingResults(data) {
                           builder: (context) => DescriptionScreen(
                             title: data[index]['title']['romaji'],
                             description: data[index]['description'],
-                            image: data[index]['coverImage']['large'],
+                            image: data[index]['coverImage']['extraLarge'],
+                            avgScore: data[index]['averageScore'],
                           ),
                         ),
                       );

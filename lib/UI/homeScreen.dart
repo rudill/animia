@@ -181,6 +181,7 @@ Column animeCards(data, int index, BuildContext context) {
                 title: data[index]['title']['romaji'],
                 description: data[index]['description'],
                 image: data[index]['coverImage']['large'],
+                avgScore: data[index]['averageScore'],
               ),
             ),
           );
