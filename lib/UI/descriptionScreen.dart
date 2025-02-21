@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 
+import 'hexColorConverter.dart';
+
 class DescriptionScreen extends StatelessWidget {
   final String title;
   final String description;
   final String image;
   final int avgScore;
+  final String color;
 
   const DescriptionScreen(
       {super.key,
       required this.title,
       required this.description,
       required this.image,
-      required this.avgScore});
+      required this.avgScore,
+      required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -45,54 +49,68 @@ class DescriptionScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: SizedBox(
-                            width: 100,
-                            height: 100,
+                            width: 130,
+                            height: 130,
                             child: Transform.scale(
                               scale: 1,
-                              child:  CircularProgressIndicator(
-                                value: avgScore/100,
-                                strokeWidth: 10,
+                              child: ClipOval(
+                                child: CircularProgressIndicator(
+                                  value: avgScore / 100,
+                                  strokeWidth: 18,
+                                  color: HexColor(colorValue: color)
+                                          .parseHexColor() ??
+                                      Colors.white,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                         Positioned(
-                          child: Text(
-                            avgScore.toString()
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-                Column(
-                  children: [
-                    Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            width: 100,
-                            height: 100,
-                            child: Transform.scale(
-                              scale: 1,
-                              child: const CircularProgressIndicator(
-                                value: 0.8,
-                                strokeWidth: 10,
-                              ),
+                        Positioned(
+                            child: Chip(
+                          label: Text(
+                            avgScore.toString(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30,
                             ),
                           ),
-                        ),
-                        const Positioned(
-                          child: Text(
-                            'e',
-                          ),
-                        )
+                          backgroundColor:
+                              HexColor(colorValue: color).parseHexColor() ??
+                                  Colors.white,
+                        ))
                       ],
                     )
                   ],
                 ),
+                // Column(
+                //   children: [
+                //     Stack(
+                //       alignment: Alignment.center,
+                //       children: [
+                //         Padding(
+                //           padding: const EdgeInsets.all(8.0),
+                //           child: SizedBox(
+                //             width: 100,
+                //             height: 100,
+                //             child: Transform.scale(
+                //               scale: 1,
+                //               child: const CircularProgressIndicator(
+                //                 value: 0.8,
+                //                 strokeWidth: 10,
+                //               ),
+                //             ),
+                //           ),
+                //         ),
+                //         const Positioned(
+                //           child: Text(
+                //             'e',
+                //           ),
+                //         )
+                //       ],
+                //     )
+                //   ],
+                // ),
               ],
             )
 

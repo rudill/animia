@@ -8,7 +8,7 @@ class HexColor {
   const HexColor({required this.colorValue});
 
   Color parseHexColor() {
-    if (colorValue == null || colorValue.isEmpty) {
+    if (colorValue.isEmpty) {
       return Colors.grey; // Fallback color
     }
 

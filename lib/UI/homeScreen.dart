@@ -103,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Query(
                 options: QueryOptions(
                   document: gql(trendingAnime),
-                  variables: {"page": 1, "perPage": 10},
+                  variables: const {"page": 1, "perPage": 10},
                 ),
                 builder: (QueryResult result, {refetch, fetchMore}) {
                   if (result.isLoading) {
@@ -182,6 +182,7 @@ Column animeCards(data, int index, BuildContext context) {
                 description: data[index]['description'],
                 image: data[index]['coverImage']['large'],
                 avgScore: data[index]['averageScore'],
+                color: data[index]['coverImage']['color'],
               ),
             ),
           );
