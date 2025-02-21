@@ -61,6 +61,12 @@ String searchQueryForPages = r'''
             genres
             averageScore
             
+            nextAiringEpisode {
+                airingAt
+                timeUntilAiring
+                episode
+            }
+            
             
         } 
     }
@@ -87,6 +93,7 @@ String trendingAnime = r'''
               coverImage {
                   large
                   color
+                  extraLarge
               }
               description
               genres

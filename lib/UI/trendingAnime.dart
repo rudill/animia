@@ -73,14 +73,17 @@ Widget buildTrendingResults(data) {
                           builder: (context) => DescriptionScreen(
                             title: data[index]['title']['romaji'],
                             description: data[index]['description'],
-                            image: data[index]['coverImage']['large'],
+                            image: data[index]['coverImage']['extraLarge'],
+                            avgScore: data[index]['averageScore'],
+                            color: data[index]['coverImage']['color'],
                           ),
                         ),
                       );
                     },
                     child: Container(
                       padding: const EdgeInsets.all(12),
-                      margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 6, horizontal: 10),
                       //height: 270.0,
                       width: 350.0,
                       decoration: BoxDecoration(
@@ -119,7 +122,8 @@ Widget buildTrendingResults(data) {
                                         child: Text(
                                           data[index]['title']['romaji'],
                                           style: const TextStyle(
-                                              fontSize: 16, fontWeight: FontWeight.w500),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500),
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 2,
                                         ),
@@ -140,34 +144,37 @@ Widget buildTrendingResults(data) {
                                   Column(
                                     children: [
                                       Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          for (var genre in data[index]['genres'].take(2))
+                                          for (var genre
+                                              in data[index]['genres'].take(2))
                                             Padding(
-                                              padding: const EdgeInsets.only(right: 5),
+                                              padding: const EdgeInsets.only(
+                                                  right: 5),
                                               child: Chip(
                                                 label: Text(genre),
-                                                backgroundColor: HexColor(
-                                                    colorValue: data[index]
-                                                    ['coverImage']['color'] ??
-                                                        '#FFFFFF')
-                                                    .parseHexColor(),
+                                                backgroundColor: HexColor( colorValue: data[index]['coverImage']['color'] ??'#FFFFFF').parseHexColor(),
                                               ),
                                             ),
                                         ],
                                       ),
                                       if (data[index]['genres'].length > 2)
                                         Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.only(right: 5),
+                                              padding: const EdgeInsets.only(
+                                                  right: 5),
                                               child: Chip(
-                                                label: Text(data[index]['genres'][2]),
+                                                label: Text(
+                                                    data[index]['genres'][2]),
                                                 backgroundColor: HexColor(
-                                                    colorValue: data[index]
-                                                    ['coverImage']['color'] ??
-                                                        '#FFFFFF')
+                                                        colorValue: data[index][
+                                                                    'coverImage']
+                                                                ['color'] ??
+                                                            '#FFFFFF')
                                                     .parseHexColor(),
                                               ),
                                             ),
