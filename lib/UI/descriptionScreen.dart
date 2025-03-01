@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'circularprogressPainter.dart';
+import 'colorSetter.dart';
 import 'hexColorConverter.dart';
 
 class DescriptionScreen extends StatefulWidget {
@@ -57,16 +58,19 @@ class _DescriptionScreenState extends State<DescriptionScreen>
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
-              height: 10,
-            ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                widget.image,
-                height: 430,
-                width: 360,
-                fit: BoxFit.cover,
+            // const SizedBox(
+            //   height: 10,
+            // ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  widget.image,
+                  height: 430,
+                  width: 360,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
 
@@ -79,20 +83,19 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(20.0),
-                          child: SizedBox(
-                            width: 130,
-                            height: 130,
+                          child: Container(
+                            width: 100,
+                            height: 100,
                             child: AnimatedBuilder(
-                                animation: _animation,
-                                builder: (context, child) {
-                                  return CustomPaint(
-                                    painter: CircularProgressPainter(
+                              animation: _animation,
+                              builder: (context, child) {
+                                return CustomPaint(
+                                  painter: CircularProgressPainter(
                                       progress: _animation.value,
-                                      color: HexColor(colorValue: widget.color)
-                                          .parseHexColor(),
-                                    ),
-                                  );
-                                }),
+                                      color: getScoreColor(widget.avgScore)),
+                                );
+                              },
+                            ),
                           ),
                         ),
                         AnimatedBuilder(
@@ -109,6 +112,14 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                           },
                         ),
                       ],
+                    ),
+                    const Text(
+                      'Average score',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
                     )
                   ],
                 ),
