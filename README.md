@@ -1,16 +1,24 @@
 # Animia
 
-My new Flutter project for customized anime tracker.
+Animia is a Flutter application designed to be a customized anime tracker. It allows users to keep track of their favorite anime, view trending anime, and get detailed information about each anime.
+
+## Features
+
+- **Trending Anime**: View the most popular anime of the current season.
+- **Anime Details**: Get detailed information about each anime, including title, description, cover image, genres, and average score.
+- **Optimistic UI Updates**: Experience smooth and responsive UI updates with optimistic transactions.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Prerequisites
 
-A few resources to get you started if this is your first Flutter project:
+- [Flutter](https://flutter.dev/docs/get-started/install) (version 2.0 or higher)
+- [Dart](https://dart.dev/get-dart)
+- [GraphQL](https://graphql.org/)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Installation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/rudill/animia.git
+   cd animia
