@@ -7,28 +7,19 @@ import 'descriptionScreen.dart';
 import 'hexColorConverter.dart';
 
 class TrendingAnimeSection extends StatelessWidget {
-  const TrendingAnimeSection({super.key});
+  final String queryName;
+
+  const TrendingAnimeSection({super.key, required this.queryName});
 
   @override
   Widget build(BuildContext context) {
-    return GraphQLProvider(
-      client: ValueNotifier(GraphQLConfig.client()),
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              trendingQuery(),
-            ],
-          ),
-        ),
-      ),
-    );
+    return trendingQuery(queryName);
   }
 
-  Query<Object?> trendingQuery() {
+  Widget trendingQuery(String query) {
     return Query(
       options: QueryOptions(
-        document: gql(trendingAnime),
+        document: gql(query),
         variables: const {"page": 1, "perPage": 10},
       ),
       builder: (QueryResult result, {refetch, fetchMore}) {
@@ -154,7 +145,12 @@ Widget buildTrendingResults(data) {
                                                   right: 5),
                                               child: Chip(
                                                 label: Text(genre),
-                                                backgroundColor: HexColor( colorValue: data[index]['coverImage']['color'] ??'#FFFFFF').parseHexColor(),
+                                                backgroundColor: HexColor(
+                                                        colorValue: data[index][
+                                                                    'coverImage']
+                                                                ['color'] ??
+                                                            '#FFFFFF')
+                                                    .parseHexColor(),
                                               ),
                                             ),
                                         ],

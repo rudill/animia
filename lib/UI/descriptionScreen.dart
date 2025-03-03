@@ -8,16 +8,16 @@ class DescriptionScreen extends StatefulWidget {
   final String title;
   final String description;
   final String image;
-  final int avgScore;
-  final String color;
+  final int? avgScore;
+  final String? color;
 
   const DescriptionScreen(
       {super.key,
       required this.title,
       required this.description,
       required this.image,
-      required this.avgScore,
-      required this.color});
+      this.avgScore,
+      this.color});
 
   @override
   State<DescriptionScreen> createState() => _DescriptionScreenState();
@@ -36,7 +36,8 @@ class _DescriptionScreenState extends State<DescriptionScreen>
       vsync: this,
       duration: const Duration(seconds: 2),
     );
-    _animation = Tween<double>(begin: 0, end: widget.avgScore / 100).animate(
+    _animation =
+        Tween<double>(begin: 0, end: (widget.avgScore ?? 0) / 100).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
     );
     _animationController.forward();
@@ -83,7 +84,7 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(20.0),
-                          child: Container(
+                          child: SizedBox(
                             width: 100,
                             height: 100,
                             child: AnimatedBuilder(
@@ -92,7 +93,7 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                                 return CustomPaint(
                                   painter: CircularProgressPainter(
                                       progress: _animation.value,
-                                      color: getScoreColor(widget.avgScore)),
+                                      color: getScoreColor(widget.avgScore ?? 0)),
                                 );
                               },
                             ),

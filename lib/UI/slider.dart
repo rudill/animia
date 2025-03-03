@@ -1,4 +1,4 @@
-// THIS IS HOME
+
 
 import 'dart:async';
 
@@ -9,14 +9,14 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import '../graphqlFiles/graphql_config.dart';
 import '../graphqlFiles/quaries.dart';
 
-class TrendingSlider extends StatefulWidget {
-  const TrendingSlider({super.key});
+class AnimeSlider extends StatefulWidget {
+  const AnimeSlider({super.key});
 
   @override
-  State<TrendingSlider> createState() => _TrendingSliderState();
+  State<AnimeSlider> createState() => _AnimeSliderState();
 }
 
-class _TrendingSliderState extends State<TrendingSlider>
+class _AnimeSliderState extends State<AnimeSlider>
     with SingleTickerProviderStateMixin {
   late PageController _pageController;
   late AnimationController _animationController;
@@ -33,7 +33,7 @@ class _TrendingSliderState extends State<TrendingSlider>
     );
     _timer = Timer.periodic(
       const Duration(seconds: 3),
-      (Timer timer) {
+          (Timer timer) {
         if (_currentPage < 9) {
           _currentPage++;
         } else {
@@ -62,65 +62,28 @@ class _TrendingSliderState extends State<TrendingSlider>
 
   @override
   Widget build(BuildContext context) {
-    return GraphQLProvider(
-      client: ValueNotifier(GraphQLConfig.client()),
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              Query(
-                options: QueryOptions(
-                  document: gql(trendingAnime),
-                  variables: const {"page": 1, "perPage": 10},
-                ),
-                builder: (QueryResult result, {refetch, fetchMore}) {
-                  if (result.isLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  if (result.hasException) {
-                    return Center(child: Text(result.exception.toString()));
-                  }
-
-                  final data = result.data?['Page']['media'];
-                  if (data == null) {
-                    return const Center(child: Text('No data found'));
-                  }
-
-                  return buildSizedBox(data);
-                },
-              ),
-              Query(
-                options: QueryOptions(
-                  document: gql(trendingAnime),
-                  variables: const {"page": 1, "perPage": 10},
-                ),
-                builder: (QueryResult result, {refetch, fetchMore}) {
-                  if (result.isLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  if (result.hasException) {
-                    return Center(child: Text(result.exception.toString()));
-                  }
-
-                  final data = result.data?['Page']['media'];
-                  if (data == null) {
-                    return const Center(child: Text('No data found'));
-                  }
-
-                  return buildTrendingResults(data);
-                },
-              ),
-            ],
-          ),
-        ),
+    return Query(
+      options: QueryOptions(
+        document: gql(trendingAnime),
+        variables: const {"page": 1, "perPage": 10},
       ),
+      builder: (QueryResult result, {refetch, fetchMore}) {
+        if (result.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (result.hasException) {
+          return Center(child: Text(result.exception.toString()));
+        }
+
+        final data = result.data?['Page']['media'];
+        if (data == null) {
+          return const Center(child: Text('No data found'));
+        }
+
+        return buildSizedBox(data);
+      },
     );
   }
 
@@ -149,15 +112,15 @@ class _TrendingSliderState extends State<TrendingSlider>
     );
   }
 
-  // ListView buildSlides(data) {
-  //   return ListView.builder(
-  //     scrollDirection: Axis.horizontal,
-  //     itemCount: data.length,
-  //     itemBuilder: (BuildContext context, index) {
-  //       return sliderItem(data, index);
-  //     },
-  //   );
-  // }
+// ListView buildSlides(data) {
+//   return ListView.builder(
+//     scrollDirection: Axis.horizontal,
+//     itemCount: data.length,
+//     itemBuilder: (BuildContext context, index) {
+//       return sliderItem(data, index);
+//     },
+//   );
+// }
 }
 
 Widget sliderItem(data, int index) {

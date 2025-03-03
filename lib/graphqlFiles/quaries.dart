@@ -104,3 +104,30 @@ String trendingAnime = r'''
 
 
  ''';
+
+
+String allTimePopular = r''' 
+
+  query ($page: Int, $perPage: Int, $season: MediaSeason, $seasonYear: Int) {
+    Page(page: $page, perPage: $perPage) {
+        media(season: $season, seasonYear: $seasonYear, sort: POPULARITY_DESC, type: ANIME) {
+            id
+            title {
+                romaji
+                english
+                native
+            }
+            coverImage {
+                large
+                color
+                extraLarge
+            }
+            description
+            genres
+            averageScore
+        }
+    }
+}
+
+
+''';
