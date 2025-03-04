@@ -77,7 +77,6 @@ String searchQueryForPages = r'''
 
 ''';
 
-
 String trendingAnime = r'''
 
   
@@ -98,13 +97,18 @@ String trendingAnime = r'''
               description
               genres
               averageScore
+              
+              nextAiringEpisode {
+                airingAt
+                timeUntilAiring
+                episode
+            }
           }
       }
   }
 
 
  ''';
-
 
 String allTimePopular = r''' 
 
@@ -125,6 +129,12 @@ String allTimePopular = r'''
             description
             genres
             averageScore
+            
+            nextAiringEpisode {
+                airingAt
+                timeUntilAiring
+                episode
+            }
         }
     }
 }

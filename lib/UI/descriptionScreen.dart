@@ -10,6 +10,7 @@ class DescriptionScreen extends StatefulWidget {
   final String image;
   final int? avgScore;
   final String? color;
+  final int? timeUntilAiring;
 
   const DescriptionScreen(
       {super.key,
@@ -17,7 +18,8 @@ class DescriptionScreen extends StatefulWidget {
       required this.description,
       required this.image,
       this.avgScore,
-      this.color});
+      this.color,
+      this.timeUntilAiring});
 
   @override
   State<DescriptionScreen> createState() => _DescriptionScreenState();
@@ -48,6 +50,16 @@ class _DescriptionScreenState extends State<DescriptionScreen>
     // TODO: implement dispose
     _animationController.dispose();
     super.dispose();
+  }
+
+  String convertTime() {
+    if (widget.timeUntilAiring == null) {
+      return 'N/A';
+    } else {
+      double? timeHours = (widget.timeUntilAiring! / 60) / 60;
+      int timeHoursRounded = timeHours.round();
+      return timeHoursRounded.toString();
+    }
   }
 
   @override
@@ -93,7 +105,8 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                                 return CustomPaint(
                                   painter: CircularProgressPainter(
                                       progress: _animation.value,
-                                      color: getScoreColor(widget.avgScore ?? 0)),
+                                      color:
+                                          getScoreColor(widget.avgScore ?? 0)),
                                 );
                               },
                             ),
@@ -152,6 +165,18 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                 //     )
                 //   ],
                 // ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: SizedBox(
+                    height: 50,
+                    width: 50,
+                    child: Text(
+                      convertTime(),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w100, fontSize: 20),
+                    ),
+                  ),
+                )
               ],
             )
 

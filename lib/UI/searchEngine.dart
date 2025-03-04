@@ -69,7 +69,6 @@ class _SearchEngineState extends State<SearchEngine> {
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-
               // Query(
               //   options: QueryOptions(
               //     document: gql(searchQueryForPages),
@@ -184,6 +183,8 @@ Column animeCards(data, int index, BuildContext context) {
                 image: data[index]['coverImage']['large'],
                 avgScore: data[index]['averageScore'],
                 color: data[index]['coverImage']['color'],
+                timeUntilAiring: data[index]['nextAiringEpisode']
+                    ['timeUntilAiring'],
               ),
             ),
           );
