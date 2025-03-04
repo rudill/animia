@@ -11,6 +11,7 @@ class DescriptionScreen extends StatefulWidget {
   final int? avgScore;
   final String? color;
   final int? timeUntilAiring;
+  final int? episode;
 
   const DescriptionScreen(
       {super.key,
@@ -19,7 +20,8 @@ class DescriptionScreen extends StatefulWidget {
       required this.image,
       this.avgScore,
       this.color,
-      this.timeUntilAiring});
+      this.timeUntilAiring,
+      this.episode});
 
   @override
   State<DescriptionScreen> createState() => _DescriptionScreenState();
@@ -56,9 +58,10 @@ class _DescriptionScreenState extends State<DescriptionScreen>
     if (widget.timeUntilAiring == null) {
       return 'N/A';
     } else {
-      double? timeHours = (widget.timeUntilAiring! / 60) / 60;
+      double? timeHours = ((widget.timeUntilAiring! / 60) / 60) / 24;
       int timeHoursRounded = timeHours.round();
-      return timeHoursRounded.toString();
+
+      return '${timeHoursRounded.toString()} Days';
     }
   }
 
@@ -167,13 +170,51 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                 // ),
                 Align(
                   alignment: Alignment.topRight,
-                  child: SizedBox(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: HexColor(colorValue: widget.color ?? '#FFFFFF')
+                            .parseHexColor(),
+                        width: 2, // Set the width of the border
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                      // boxShadow: [
+                      //   BoxShadow(
+                      //     color: HexColor(colorValue: widget.color ?? '#FFFFFF')
+                      //         .parseHexColor(),
+                      //    // blurRadius: 2,
+                      //     spreadRadius: 2,
+                      //   ),
+                      // ],
+                    ),
                     height: 50,
-                    width: 50,
-                    child: Text(
-                      convertTime(),
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w100, fontSize: 20),
+                    width: 150,
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              'Episode ${widget.episode.toString()} airing in',
+                              maxLines: 2,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              convertTime(),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
                     ),
                   ),
                 )

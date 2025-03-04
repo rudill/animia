@@ -67,8 +67,10 @@ Widget buildTrendingResults(data) {
                             image: data[index]['coverImage']['extraLarge'],
                             avgScore: data[index]['averageScore'],
                             color: data[index]['coverImage']['color'],
-                            timeUntilAiring: data[index]['nextAiringEpisode']
+                            timeUntilAiring: data[index]['nextAiringEpisode']?
                                 ['timeUntilAiring'],
+                            episode: data[index]['nextAiringEpisode']?
+                            ['episode'],
                           ),
                         ),
                       );
