@@ -57,12 +57,17 @@ class _DescriptionScreenState extends State<DescriptionScreen>
   String convertTime() {
     if (widget.timeUntilAiring == null) {
       return 'N/A';
-    } else {
-      double? timeHours = ((widget.timeUntilAiring! / 60) / 60) / 24;
-      int timeHoursRounded = timeHours.round();
-
-      return '${timeHoursRounded.toString()} Days';
     }
+    double? timeDays = ((widget.timeUntilAiring! / 60) / 60) / 24;
+    double? timeHours = (widget.timeUntilAiring! / 60) / 60;
+    int timeHoursRounded = timeHours.round();
+    int timeDaysRounded = timeDays.round();
+
+    if (timeDaysRounded == 0) {
+      return '${timeHoursRounded.toString()} Hours';
+    }
+
+    return '${timeDaysRounded.toString()} Days';
   }
 
   @override
@@ -172,11 +177,11 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                   alignment: Alignment.topRight,
                   child: Container(
                     decoration: BoxDecoration(
-                      border: Border.all(
-                        color: HexColor(colorValue: widget.color ?? '#FFFFFF')
-                            .parseHexColor(),
-                        width: 2, // Set the width of the border
-                      ),
+                      // border: Border.all(
+                      //   color: HexColor(colorValue: widget.color ?? '#FFFFFF')
+                      //       .parseHexColor(),
+                      //   width: 2, // Set the width of the border
+                      // ),
                       borderRadius: BorderRadius.circular(10),
                       // boxShadow: [
                       //   BoxShadow(
@@ -187,8 +192,6 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                       //   ),
                       // ],
                     ),
-                    height: 50,
-                    width: 150,
                     child: Column(
                       children: [
                         Row(
