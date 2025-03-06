@@ -66,6 +66,7 @@ Widget buildTrendingResults(data) {
                     timeUntilAiring: data[index]['nextAiringEpisode']
                         ?['timeUntilAiring'],
                     episode: data[index]['nextAiringEpisode']?['episode'],
+                    popularity: data[index]['popularity'],
                   ),
                 ),
               );

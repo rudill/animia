@@ -12,6 +12,7 @@ class DescriptionScreen extends StatefulWidget {
   final String? color;
   final int? timeUntilAiring;
   final int? episode;
+  final int? popularity;
 
   const DescriptionScreen(
       {super.key,
@@ -21,7 +22,8 @@ class DescriptionScreen extends StatefulWidget {
       this.avgScore,
       this.color,
       this.timeUntilAiring,
-      this.episode});
+      this.episode,
+      this.popularity});
 
   @override
   State<DescriptionScreen> createState() => _DescriptionScreenState();
@@ -94,111 +96,141 @@ class _DescriptionScreenState extends State<DescriptionScreen>
 
             Row(
               children: [
-                Column(
-                  children: [
-                    Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: SizedBox(
-                            width: 60,
-                            height: 60,
-                            child: AnimatedBuilder(
-                              animation: _animation,
-                              builder: (context, child) {
-                                return CustomPaint(
-                                  painter: CircularProgressPainter(
-                                      progress: _animation.value,
-                                      color:
-                                          getScoreColor(widget.avgScore ?? 0)),
-                                );
-                              },
+                Expanded(
+                  child: Column(
+                    children: [
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: SizedBox(
+                              width: 60,
+                              height: 60,
+                              child: AnimatedBuilder(
+                                animation: _animation,
+                                builder: (context, child) {
+                                  return CustomPaint(
+                                    painter: CircularProgressPainter(
+                                        progress: _animation.value,
+                                        color: getScoreColor(
+                                            widget.avgScore ?? 0)),
+                                  );
+                                },
+                              ),
                             ),
                           ),
-                        ),
-                        AnimatedBuilder(
-                          animation: _animation,
-                          builder: (context, child) {
-                            return Text(
-                              '${(_animation.value * 100).toInt()}%',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                    const Text(
-                      'Average score',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
+                          AnimatedBuilder(
+                            animation: _animation,
+                            builder: (context, child) {
+                              return Text(
+                                '${(_animation.value * 100).toInt()}%',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
-                    )
-                  ],
+                      const Text(
+                        'Average score',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 verticalDivider(),
                 Expanded(
                   child: Align(
-                    alignment: Alignment.topRight,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        // border: Border.all(
-                        //   color: HexColor(colorValue: widget.color ?? '#FFFFFF')
-                        //       .parseHexColor(),
-                        //   width: 2, // Set the width of the border
-                        // ),
-                        borderRadius: BorderRadius.circular(10),
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     color: HexColor(colorValue: widget.color ?? '#FFFFFF')
-                        //         .parseHexColor(),
-                        //    // blurRadius: 2,
-                        //     spreadRadius: 2,
-                        //   ),
-                        // ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Align(
-                            alignment: Alignment.center,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  'Ep ${widget.episode.toString()} in ${convertTime()}',
-                                  maxLines: 2,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                  ),
-                                )
-                              ],
-                            ),
+                    alignment: Alignment.center,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Align(
+                          alignment: Alignment.center,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'Ep ${widget.episode.toString()} in',
+                                maxLines: 2,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              )
+                            ],
                           ),
-                          const Align(
-                            alignment: Alignment.center,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  'Airing',
-                                  style: TextStyle(fontSize: 12),
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                convertTime(),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        const Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'Airing',
+                                style: TextStyle(fontSize: 12),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ),
+                verticalDivider(),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              widget.popularity.toString(),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            )
+                          ],
+                        ),
+                        const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'Popularity',
+                              style: TextStyle(fontSize: 12),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                )
               ],
             ),
 
@@ -222,14 +254,14 @@ class _DescriptionScreenState extends State<DescriptionScreen>
   }
 
   SizedBox verticalDivider() {
-    return const SizedBox(
+    return SizedBox(
       height: 60,
       child: VerticalDivider(
-        color: Colors.grey,
+        color: HexColor(colorValue: widget.color ?? '#FFFFFF').parseHexColor(),
         width: 20,
         thickness: 2,
-        indent: 2,
-        endIndent: 2,
+        indent: 5,
+        endIndent: 5,
       ),
     );
   }

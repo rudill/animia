@@ -60,6 +60,7 @@ String searchQueryForPages = r'''
             description(asHtml:false)
             genres
             averageScore
+            popularity
             
             nextAiringEpisode {
                 airingAt
@@ -97,6 +98,7 @@ String trendingAnime = r'''
               description
               genres
               averageScore
+              popularity
               
               nextAiringEpisode {
                 airingAt
@@ -129,6 +131,7 @@ String allTimePopular = r'''
             description
             genres
             averageScore
+            popularity
             
             nextAiringEpisode {
                 airingAt
