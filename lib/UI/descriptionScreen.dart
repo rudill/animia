@@ -79,9 +79,6 @@ class _DescriptionScreenState extends State<DescriptionScreen>
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // const SizedBox(
-            //   height: 10,
-            // ),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: ClipRRect(
@@ -105,8 +102,8 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                         Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: SizedBox(
-                            width: 100,
-                            height: 100,
+                            width: 60,
+                            height: 60,
                             child: AnimatedBuilder(
                               animation: _animation,
                               builder: (context, child) {
@@ -128,7 +125,7 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 30,
+                                fontSize: 16,
                               ),
                             );
                           },
@@ -140,89 +137,70 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                        fontSize: 12,
                       ),
                     )
                   ],
                 ),
-                // Column(
-                //   children: [
-                //     Stack(
-                //       alignment: Alignment.center,
-                //       children: [
-                //         Padding(
-                //           padding: const EdgeInsets.all(8.0),
-                //           child: SizedBox(
-                //             width: 100,
-                //             height: 100,
-                //             child: Transform.scale(
-                //               scale: 1,
-                //               child: const CircularProgressIndicator(
-                //                 value: 0.8,
-                //                 strokeWidth: 10,
-                //               ),
-                //             ),
-                //           ),
-                //         ),
-                //         const Positioned(
-                //           child: Text(
-                //             'e',
-                //           ),
-                //         )
-                //       ],
-                //     )
-                //   ],
-                // ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      // border: Border.all(
-                      //   color: HexColor(colorValue: widget.color ?? '#FFFFFF')
-                      //       .parseHexColor(),
-                      //   width: 2, // Set the width of the border
-                      // ),
-                      borderRadius: BorderRadius.circular(10),
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //     color: HexColor(colorValue: widget.color ?? '#FFFFFF')
-                      //         .parseHexColor(),
-                      //    // blurRadius: 2,
-                      //     spreadRadius: 2,
-                      //   ),
-                      // ],
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              'Episode ${widget.episode.toString()} airing in',
-                              maxLines: 2,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              convertTime(),
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
+                verticalDivider(),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        // border: Border.all(
+                        //   color: HexColor(colorValue: widget.color ?? '#FFFFFF')
+                        //       .parseHexColor(),
+                        //   width: 2, // Set the width of the border
+                        // ),
+                        borderRadius: BorderRadius.circular(10),
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //     color: HexColor(colorValue: widget.color ?? '#FFFFFF')
+                        //         .parseHexColor(),
+                        //    // blurRadius: 2,
+                        //     spreadRadius: 2,
+                        //   ),
+                        // ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Align(
+                            alignment: Alignment.center,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'Ep ${widget.episode.toString()} in ${convertTime()}',
+                                  maxLines: 2,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  ),
+                                )
+                              ],
                             ),
-                          ],
-                        )
-                      ],
+                          ),
+                          const Align(
+                            alignment: Alignment.center,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'Airing',
+                                  style: TextStyle(fontSize: 12),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                )
+                ),
               ],
-            )
+            ),
 
             // Padding(
             //   padding: const EdgeInsets.all(8.0),
@@ -239,6 +217,19 @@ class _DescriptionScreenState extends State<DescriptionScreen>
             // ),
           ],
         ),
+      ),
+    );
+  }
+
+  SizedBox verticalDivider() {
+    return const SizedBox(
+      height: 60,
+      child: VerticalDivider(
+        color: Colors.grey,
+        width: 20,
+        thickness: 2,
+        indent: 2,
+        endIndent: 2,
       ),
     );
   }
