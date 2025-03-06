@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       scaffoldBackgroundColor: const Color(0xFF0D1622),
       textTheme:  const TextTheme(
         bodyLarge: TextStyle(color: Colors.white, fontSize: 18),
-        bodyMedium: TextStyle(color: Colors.white70, fontSize: 16),
+        bodyMedium: TextStyle(color: Colors.white, fontSize: 16),
         displayLarge: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
       ),
       buttonTheme: const ButtonThemeData(

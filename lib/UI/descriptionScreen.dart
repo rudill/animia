@@ -135,18 +135,18 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                           ),
                         ],
                       ),
-                      const Text(
-                        'Average score',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                        ),
-                      )
+                      // const Text(
+                      //   'Average score',
+                      //   style: TextStyle(
+                      //     color: Colors.white,
+                      //     fontWeight: FontWeight.bold,
+                      //     fontSize: 12,
+                      //   ),
+                      // )
                     ],
                   ),
                 ),
-                verticalDivider(),
+                //verticalDivider(),
                 Expanded(
                   child: Align(
                     alignment: Alignment.center,
@@ -163,7 +163,7 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                                 maxLines: 2,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                                  fontSize: 16,
                                 ),
                               )
                             ],
@@ -178,29 +178,29 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                                 convertTime(),
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                                  fontSize: 16,
                                 ),
                               )
                             ],
                           ),
                         ),
-                        const Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'Airing',
-                                style: TextStyle(fontSize: 12),
-                              )
-                            ],
-                          ),
-                        )
+                        // const Align(
+                        //   alignment: Alignment.bottomCenter,
+                        //   child: Row(
+                        //     mainAxisSize: MainAxisSize.min,
+                        //     children: [
+                        //       Text(
+                        //         'Airing',
+                        //         style: TextStyle(fontSize: 12),
+                        //       )
+                        //     ],
+                        //   ),
+                        // )
                       ],
                     ),
                   ),
                 ),
-                verticalDivider(),
+                //verticalDivider(),
                 Expanded(
                   child: Align(
                     alignment: Alignment.center,
@@ -213,7 +213,7 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                               widget.popularity.toString(),
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                                fontSize: 16,
                               ),
                             )
                           ],
@@ -221,10 +221,10 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                         const Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(
-                              'Popularity',
-                              style: TextStyle(fontSize: 12),
-                            )
+                            // Text(
+                            //   'Popularity',
+                            //   style: TextStyle(fontSize: 12),
+                            // )
                           ],
                         )
                       ],
@@ -233,6 +233,59 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                 )
               ],
             ),
+            const Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Average score',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.center,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'Airing',
+                              style: TextStyle(fontSize: 12),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Popularity',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            )
 
             // Padding(
             //   padding: const EdgeInsets.all(8.0),
