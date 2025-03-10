@@ -105,8 +105,8 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                           Padding(
                             padding: const EdgeInsets.all(20.0),
                             child: SizedBox(
-                              width: 60,
-                              height: 60,
+                              width: 50,
+                              height: 50,
                               child: AnimatedBuilder(
                                 animation: _animation,
                                 builder: (context, child) {
@@ -244,8 +244,6 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                         child: Text(
                           'Average score',
                           style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
                             fontSize: 12,
                           ),
                         ),
@@ -285,19 +283,41 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                   ),
                 )
               ],
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: 70,
+                        child: SingleChildScrollView(
+                          child: Text(
+                            widget.description,
+                            style: const TextStyle(
+                              fontSize: 10,
+                              color: Colors.white,
+                            ),
+                            //    overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
             )
 
             // Padding(
             //   padding: const EdgeInsets.all(8.0),
             //   child: SingleChildScrollView(
-            //     child: Text(
-            //       description,
-            //       style: const TextStyle(
-            //         fontSize: 20,
-            //         color: Colors.white,
-            //       ),
-            //   //    overflow: TextOverflow.ellipsis,
-            //     ),
+            //     child:
             //   ),
             // ),
           ],
