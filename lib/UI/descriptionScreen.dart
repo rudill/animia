@@ -13,6 +13,7 @@ class DescriptionScreen extends StatefulWidget {
   final int? timeUntilAiring;
   final int? episode;
   final int? popularity;
+  final List<String>? genre;
 
   const DescriptionScreen(
       {super.key,
@@ -23,7 +24,8 @@ class DescriptionScreen extends StatefulWidget {
       this.color,
       this.timeUntilAiring,
       this.episode,
-      this.popularity});
+      this.popularity,
+      this.genre});
 
   @override
   State<DescriptionScreen> createState() => _DescriptionScreenState();
@@ -312,6 +314,21 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                   ],
                 ),
               ),
+            ),
+
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (widget.genre != null)
+                  for (var gen in widget.genre!)
+                    Chip(
+                      label: Text(gen),
+                      backgroundColor:
+                          HexColor(colorValue: widget.color ?? '#FFFFFF')
+                              .parseHexColor(),
+                    )
+              ],
             )
 
             // Padding(
