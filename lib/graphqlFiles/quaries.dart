@@ -99,6 +99,7 @@ String trendingAnime = r'''
               genres
               averageScore
               popularity
+              bannerImage
               
               nextAiringEpisode {
                 airingAt
@@ -132,6 +133,7 @@ String allTimePopular = r'''
             genres
             averageScore
             popularity
+            bannerImage
             
             nextAiringEpisode {
                 airingAt

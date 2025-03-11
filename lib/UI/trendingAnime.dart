@@ -57,17 +57,20 @@ Widget buildTrendingResults(data) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => DescriptionScreen(
-                        title: data[index]['title']['romaji'],
-                        description: data[index]['description'],
-                        image: data[index]['coverImage']['extraLarge'],
-                        avgScore: data[index]['averageScore'],
-                        color: data[index]['coverImage']['color'],
-                        timeUntilAiring: data[index]['nextAiringEpisode']
-                            ?['timeUntilAiring'],
-                        episode: data[index]['nextAiringEpisode']?['episode'],
-                        popularity: data[index]['popularity'],
-                        genre: List<String>.from(data[index]['genres']))),
+                  builder: (context) => DescriptionScreen(
+                    title: data[index]['title']['romaji'],
+                    description: data[index]['description'],
+                    image: data[index]['coverImage']['extraLarge'],
+                    avgScore: data[index]['averageScore'],
+                    color: data[index]['coverImage']['color'],
+                    timeUntilAiring: data[index]['nextAiringEpisode']
+                        ?['timeUntilAiring'],
+                    episode: data[index]['nextAiringEpisode']?['episode'],
+                    popularity: data[index]['popularity'],
+                    genre: List<String>.from(data[index]['genres']),
+                    bannerImage:  data[index]['bannerImage'],
+                  ),
+                ),
               );
             },
             child: Container(

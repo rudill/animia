@@ -14,6 +14,7 @@ class DescriptionScreen extends StatefulWidget {
   final int? episode;
   final int? popularity;
   final List<String>? genre;
+  final String? bannerImage;
 
   const DescriptionScreen(
       {super.key,
@@ -25,7 +26,8 @@ class DescriptionScreen extends StatefulWidget {
       this.timeUntilAiring,
       this.episode,
       this.popularity,
-      this.genre});
+      this.genre,
+      this.bannerImage});
 
   @override
   State<DescriptionScreen> createState() => _DescriptionScreenState();
@@ -77,23 +79,60 @@ class _DescriptionScreenState extends State<DescriptionScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(200.0), // Set the height of the AppBar
+        child: AppBar(
+          flexibleSpace: Stack(
+            children: [
+              Positioned.fill(
+                child: Image.network(
+                  widget.bannerImage ?? '',
+                  fit: BoxFit.cover
+                ),
+              ),
+              Positioned(
+                child: Container(
+
+                  //width: 380,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [Colors.black, Colors.transparent],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          backgroundColor: Colors.transparent,
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  widget.image,
-                  height: 430,
-                  width: 360,
-                  fit: BoxFit.cover,
+            Row(
+              children: [
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.network(
+                            widget.image,
+                            height: 230,
+                            width: 160,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
+              ],
             ),
 
             Row(
@@ -298,7 +337,7 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                   children: [
                     Expanded(
                       child: SizedBox(
-                        height: 70,
+                        height: 100,
                         child: SingleChildScrollView(
                           child: Text(
                             widget.description,
@@ -316,18 +355,36 @@ class _DescriptionScreenState extends State<DescriptionScreen>
               ),
             ),
 
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
+            Column(
               children: [
-                if (widget.genre != null)
-                  for (var gen in widget.genre!)
-                    Chip(
-                      label: Text(gen),
-                      backgroundColor:
-                          HexColor(colorValue: widget.color ?? '#FFFFFF')
-                              .parseHexColor(),
-                    )
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Wrap(
+                      spacing: 4.0,
+                      children: [
+                        if (widget.genre != null)
+                          for (var gen in widget.genre!)
+                            Chip(
+                              elevation: 10.0,
+                              shadowColor: HexColor(
+                                      colorValue: widget.color ?? '#FFFFFF')
+                                  .parseHexColor(),
+
+                              backgroundColor: HexColor(
+                                      colorValue: widget.color ?? '#FFFFFF')
+                                  .parseHexColor(),
+
+                              label: Text(gen),
+                              // backgroundColor:
+                              //     HexColor(colorValue: widget.color ?? '#FFFFFF')
+                              //         .parseHexColor(),
+                            )
+                      ],
+                    ),
+                  ),
+                ),
               ],
             )
 
