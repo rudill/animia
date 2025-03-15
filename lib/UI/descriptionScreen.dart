@@ -18,16 +18,16 @@ class DescriptionScreen extends StatefulWidget {
 
   const DescriptionScreen(
       {super.key,
-        required this.title,
-        required this.description,
-        required this.image,
-        this.avgScore,
-        this.color,
-        this.timeUntilAiring,
-        this.episode,
-        this.popularity,
-        this.genre,
-        this.bannerImage});
+      required this.title,
+      required this.description,
+      required this.image,
+      this.avgScore,
+      this.color,
+      this.timeUntilAiring,
+      this.episode,
+      this.popularity,
+      this.genre,
+      this.bannerImage});
 
   @override
   State<DescriptionScreen> createState() => _DescriptionScreenState();
@@ -47,8 +47,8 @@ class _DescriptionScreenState extends State<DescriptionScreen>
     );
     _animation =
         Tween<double>(begin: 0, end: (widget.avgScore ?? 0) / 100).animate(
-          CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
-        );
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
     _animationController.forward();
   }
 
@@ -127,23 +127,46 @@ class _DescriptionScreenState extends State<DescriptionScreen>
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                Row(
+                Column(
                   children: [
-                    Column(
+                    Row(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.network(
-                                widget.image,
-                                height: 230,
-                                width: 160,
-                                fit: BoxFit.cover,
+                        Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.network(
+                                    widget.image,
+                                    height: 230,
+                                    width: 160,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                             ),
+                          ],
+                        ),
+                        Expanded(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  widget.title,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -351,10 +374,10 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                                 Chip(
                                   elevation: 10.0,
                                   shadowColor: HexColor(
-                                      colorValue: widget.color ?? '#FFFFFF')
+                                          colorValue: widget.color ?? '#FFFFFF')
                                       .parseHexColor(),
                                   backgroundColor: HexColor(
-                                      colorValue: widget.color ?? '#FFFFFF')
+                                          colorValue: widget.color ?? '#FFFFFF')
                                       .parseHexColor(),
                                   label: Text(gen),
                                 )
