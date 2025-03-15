@@ -14,6 +14,7 @@ class DescriptionScreen extends StatefulWidget {
   final int? episode;
   final int? popularity;
   final List<String>? genre;
+  final List<String>? characters;
   final String? bannerImage;
 
   const DescriptionScreen(
@@ -27,7 +28,8 @@ class DescriptionScreen extends StatefulWidget {
       this.episode,
       this.popularity,
       this.genre,
-      this.bannerImage});
+      this.bannerImage,
+      this.characters});
 
   @override
   State<DescriptionScreen> createState() => _DescriptionScreenState();
@@ -385,6 +387,19 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                         ),
                       ),
                     ),
+                    // Row(
+                    //   children: [
+                    //     Wrap(
+                    //       children: [
+                    //         if (widget.characters != null)
+                    //           for (var char in widget.characters!)
+                    //             Chip(
+                    //               label: Text(char),
+                    //             )
+                    //       ],
+                    //     )
+                    //   ],
+                    // )
                   ],
                 )
               ],

@@ -68,6 +68,7 @@ Widget buildTrendingResults(data) {
                     episode: data[index]['nextAiringEpisode']?['episode'],
                     popularity: data[index]['popularity'],
                     genre: List<String>.from(data[index]['genres']),
+                   // characters: List<String>.from(data[index]['characters']['nodes']['name']['full']),
                     bannerImage:  data[index]['bannerImage'],
                   ),
                 ),

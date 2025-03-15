@@ -106,6 +106,17 @@ String trendingAnime = r'''
                 timeUntilAiring
                 episode
             }
+            
+              characters(role: MAIN, perPage: 5) {
+                nodes {
+                    name {
+                        full
+                    }
+                    image {
+                        medium
+                    }
+                }
+            }
           }
       }
   }
@@ -139,6 +150,17 @@ String allTimePopular = r'''
                 airingAt
                 timeUntilAiring
                 episode
+            }
+            
+              characters(role: MAIN, perPage: 5) {
+                nodes {
+                    name {
+                        full
+                    }
+                    image {
+                        medium
+                    }
+                }
             }
         }
     }
