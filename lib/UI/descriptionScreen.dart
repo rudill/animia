@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:animia/UI/trendingAnime.dart';
 import 'package:flutter/material.dart';
 import 'circularprogressPainter.dart';
 import 'colorSetter.dart';
@@ -14,7 +15,7 @@ class DescriptionScreen extends StatefulWidget {
   final int? episode;
   final int? popularity;
   final List<String>? genre;
-  final List<String>? characters;
+  final List<Character>? characters;
   final String? bannerImage;
 
   const DescriptionScreen(
@@ -387,19 +388,16 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                         ),
                       ),
                     ),
-                    // Row(
-                    //   children: [
-                    //     Wrap(
-                    //       children: [
-                    //         if (widget.characters != null)
-                    //           for (var char in widget.characters!)
-                    //             Chip(
-                    //               label: Text(char),
-                    //             )
-                    //       ],
-                    //     )
-                    //   ],
-                    // )
+                    Wrap(
+                      spacing: 4.0,
+                      children: [
+                        if (widget.characters != null)
+                          for (var char in widget.characters!)
+                            Chip(
+                              label: Text(char.name),
+                            )
+                      ],
+                    )
                   ],
                 )
               ],

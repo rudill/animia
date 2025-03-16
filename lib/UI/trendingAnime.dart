@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
@@ -68,17 +70,15 @@ Widget buildTrendingResults(data) {
                     episode: data[index]['nextAiringEpisode']?['episode'],
                     popularity: data[index]['popularity'],
                     genre: List<String>.from(data[index]['genres']),
-                   // characters: List<String>.from(data[index]['characters']['nodes']['name']['full']),
-                    bannerImage:  data[index]['bannerImage'],
+                    characters: (data[index]['characters']['nodes'] as List)
+                        .map((char) => Character.fromJson(char))
+                        .toList(),
+                    bannerImage: data[index]['bannerImage'],
                   ),
                 ),
               );
             },
             child: Container(
-              // padding: const EdgeInsets.all(12),
-              // margin: const EdgeInsets.symmetric(
-              //     vertical: 6, horizontal: 10),
-              //height: 170.0,
               width: 120.0,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -94,7 +94,6 @@ Widget buildTrendingResults(data) {
                       fit: BoxFit.cover,
                     ),
                   ),
-
                   Text(
                     data[index]['title']['english'],
                     style: const TextStyle(
@@ -102,86 +101,6 @@ Widget buildTrendingResults(data) {
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   ),
-
-                  // Column(
-                  //   children: [
-                  // Row(
-                  //   children: [
-                  //     Expanded(
-                  //       child:
-                  //     ),
-                  //   ],
-                  // ),
-                  // Row(
-                  //   children: [
-                  //     Text(
-                  //       data[index]['status'] ?? 'TBA',
-                  //       style: const TextStyle(
-                  //           fontSize: 16, fontWeight: FontWeight.w500),
-                  //       overflow: TextOverflow.ellipsis,
-                  //       maxLines: 3,
-                  //     ),
-                  //   ],
-                  // ),
-                  // Column(
-                  //   children: [
-                  //     Row(
-                  //       crossAxisAlignment:
-                  //           CrossAxisAlignment.start,
-                  //       children: [
-                  //         for (var genre
-                  //             in data[index]['genres'].take(2))
-                  //           Padding(
-                  //             padding: const EdgeInsets.only(
-                  //                 right: 5),
-                  //             child: Chip(
-                  //               label: Text(genre),
-                  //               backgroundColor: HexColor(
-                  //                       colorValue: data[index][
-                  //                                   'coverImage']
-                  //                               ['color'] ??
-                  //                           '#FFFFFF')
-                  //                   .parseHexColor(),
-                  //             ),
-                  //           ),
-                  //       ],
-                  //     ),
-                  //     if (data[index]['genres'].length > 2)
-                  //       Row(
-                  //         crossAxisAlignment:
-                  //             CrossAxisAlignment.start,
-                  //         children: [
-                  //           Padding(
-                  //             padding: const EdgeInsets.only(
-                  //                 right: 5),
-                  //             child: Chip(
-                  //               label: Text(
-                  //                   data[index]['genres'][2]),
-                  //               backgroundColor: HexColor(
-                  //                       colorValue: data[index][
-                  //                                   'coverImage']
-                  //                               ['color'] ??
-                  //                           '#FFFFFF')
-                  //                   .parseHexColor(),
-                  //             ),
-                  //           ),
-                  //         ],
-                  //       ),
-                  //   ],
-                  // ),
-                  // Row(
-                  //   children: [
-                  //     Text(
-                  //       data[index]['averageScore'].toString(),
-                  //       style: const TextStyle(
-                  //           fontSize: 16, fontWeight: FontWeight.w500),
-                  //       overflow: TextOverflow.ellipsis,
-                  //       maxLines: 3,
-                  //     ),
-                  //   ],
-                  // ),
-                  //   ],
-                  // )
                 ],
               ),
             ),
@@ -190,4 +109,18 @@ Widget buildTrendingResults(data) {
       },
     ),
   );
+}
+
+class Character {
+  final String name;
+  final String image;
+
+  Character({required this.name, required this.image});
+
+  factory Character.fromJson(Map<String, dynamic> json) {
+    return Character(
+      name: json['name']['full'],
+      image: json['image']['medium'],
+    );
+  }
 }
