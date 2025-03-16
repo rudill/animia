@@ -389,29 +389,39 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                     ),
                     Wrap(
                       spacing: 4.0,
-
                       children: [
                         if (widget.characters != null)
                           for (var char in widget.characters!)
                             Card(
+                             // color: Colors.orangeAccent,
                               elevation: 5,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.network(
-                                      char.image,
-                                      fit: BoxFit.cover,
-                                      width: 70,
-                                      height: 100,
+                              child: SizedBox(
+                                width: 70,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(
+                                        char.image,
+                                        fit: BoxFit.cover,
+                                        width: 70,
+                                        height: 100,
+                                      ),
                                     ),
-                                  ),
-                                  // Text(char.name)
-                                ],
+                                    Text(
+
+                                      char.name,
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                       ],
