@@ -1,6 +1,5 @@
-import 'dart:ui';
-import 'package:animia/UI/trendingAnime.dart';
 import 'package:flutter/material.dart';
+import '../graphqlFiles/nodes.dart';
 import 'circularprogressPainter.dart';
 import 'colorSetter.dart';
 import 'hexColorConverter.dart';
@@ -390,14 +389,33 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                     ),
                     Wrap(
                       spacing: 4.0,
+
                       children: [
                         if (widget.characters != null)
                           for (var char in widget.characters!)
-                            Chip(
-                              label: Text(char.name),
-                            )
+                            Card(
+                              elevation: 5,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.network(
+                                      char.image,
+                                      fit: BoxFit.cover,
+                                      width: 70,
+                                      height: 100,
+                                    ),
+                                  ),
+                                  // Text(char.name)
+                                ],
+                              ),
+                            ),
                       ],
-                    )
+                    ),
                   ],
                 )
               ],

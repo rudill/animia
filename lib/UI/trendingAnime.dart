@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 import '../graphqlFiles/graphql_config.dart';
+import '../graphqlFiles/nodes.dart';
 import '../graphqlFiles/quaries.dart';
 import 'descriptionScreen.dart';
 import 'hexColorConverter.dart';
@@ -111,16 +112,4 @@ Widget buildTrendingResults(data) {
   );
 }
 
-class Character {
-  final String name;
-  final String image;
 
-  Character({required this.name, required this.image});
-
-  factory Character.fromJson(Map<String, dynamic> json) {
-    return Character(
-      name: json['name']['full'],
-      image: json['image']['medium'],
-    );
-  }
-}

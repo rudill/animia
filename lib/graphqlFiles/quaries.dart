@@ -107,7 +107,7 @@ String trendingAnime = r'''
                 episode
             }
             
-              characters(role: MAIN, perPage: 5) {
+              characters(role: MAIN) {
                 nodes {
                     name {
                         full
