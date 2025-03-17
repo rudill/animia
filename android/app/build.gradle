@@ -23,6 +23,9 @@ if (flutterVersionName == null) {
 }
 
 android {
+
+
+
     namespace "com.example.animia"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
@@ -39,6 +42,8 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+
+    compileSdkVersion 34
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
