@@ -29,8 +29,15 @@ jobs:
           
       - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
 
-      - name: Flutter clean
-        run: flutter clean
+      - name: Install Android SDK 34
+        run: sdkmanager "platforms;android-34"
+
+      - name: Enable Gradle daemon memory optimization
+        run: echo "org.gradle.jvmargs=-Xmx4g" >> ~/.gradle/gradle.properties
+
+      - name: Get dependencies
+        run: flutter pub get
+
 
       # - name: Install dependencies
       #   run: flutter pub get
