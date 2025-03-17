@@ -393,7 +393,7 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                         if (widget.characters != null)
                           for (var char in widget.characters!)
                             Card(
-                             // color: Colors.orangeAccent,
+                              // color: Colors.orangeAccent,
                               elevation: 5,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
@@ -413,7 +413,6 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                                       ),
                                     ),
                                     Text(
-
                                       char.name,
                                       style: const TextStyle(
                                         fontSize: 12,
