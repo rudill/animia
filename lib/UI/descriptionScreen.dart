@@ -16,6 +16,9 @@ class DescriptionScreen extends StatefulWidget {
   final List<String>? genre;
   final List<Character>? characters;
   final String? bannerImage;
+  final String? format;
+  final String? status;
+  final int? episodes;
 
   const DescriptionScreen(
       {super.key,
@@ -29,7 +32,10 @@ class DescriptionScreen extends StatefulWidget {
       this.popularity,
       this.genre,
       this.bannerImage,
-      this.characters});
+      this.characters,
+      this.format,
+      this.status,
+      this.episodes});
 
   @override
   State<DescriptionScreen> createState() => _DescriptionScreenState();
@@ -74,6 +80,13 @@ class _DescriptionScreenState extends State<DescriptionScreen>
     }
 
     return '${timeDaysRounded.toString()} Days';
+  }
+
+  String nullCheck() {
+    if (widget.episodes == null) {
+      return 'TBA';
+    }
+    return widget.episodes.toString();
   }
 
   @override
@@ -159,14 +172,71 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                             children: [
                               Align(
                                 alignment: Alignment.topLeft,
-                                child: Text(
-                                  widget.title,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(bottom: 10),
+                                  child: Text(
+                                    widget.title,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
                                   ),
                                 ),
+                              ),
+                              Row(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        widget.format ?? 'N/A',
+                                        style: const TextStyle(
+                                          color: Colors.white,
+
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        nullCheck(),
+                                        style: const TextStyle(
+                                          color: Colors.white,
+
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        widget.status ?? 'N/A',
+                                        style: const TextStyle(
+                                          color: Colors.white,
+
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),

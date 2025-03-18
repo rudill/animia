@@ -117,6 +117,9 @@ String trendingAnime = r'''
                     }
                 }
             }
+            status
+            episodes
+            format
           }
       }
   }
@@ -162,6 +165,9 @@ String allTimePopular = r'''
                     }
                 }
             }
+            status
+            episodes
+            format
         }
     }
 }

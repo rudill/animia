@@ -75,6 +75,9 @@ Widget buildTrendingResults(data) {
                         .map((char) => Character.fromJson(char))
                         .toList(),
                     bannerImage: data[index]['bannerImage'],
+                    format: data[index]['format'],
+                    episodes: data[index]['episodes'],
+                    status: data[index]['status'],
                   ),
                 ),
               );

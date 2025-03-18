@@ -43,6 +43,7 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
+
     compileSdkVersion 34
 
     defaultConfig {
