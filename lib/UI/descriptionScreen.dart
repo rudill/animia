@@ -86,7 +86,7 @@ class _DescriptionScreenState extends State<DescriptionScreen>
     if (widget.episodes == null) {
       return 'TBA';
     }
-    return widget.episodes.toString();
+    return '${widget.episodes.toString()} Episodes';
   }
 
   @override
@@ -186,6 +186,9 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                               ),
                               Row(
                                 children: [
+                                  const Icon(
+                                    Icons.tv_rounded,
+                                  ),
                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
@@ -194,7 +197,6 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                                         widget.format ?? 'N/A',
                                         style: const TextStyle(
                                           color: Colors.white,
-
                                           fontSize: 14,
                                         ),
                                       ),
@@ -204,6 +206,9 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                               ),
                               Row(
                                 children: [
+                                  const Icon(
+                                    Icons.timer_sharp,
+                                  ),
                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
@@ -212,7 +217,6 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                                         nullCheck(),
                                         style: const TextStyle(
                                           color: Colors.white,
-
                                           fontSize: 14,
                                         ),
                                       ),
@@ -222,6 +226,9 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                               ),
                               Row(
                                 children: [
+                                  const Icon(
+                                    Icons.rss_feed_rounded,
+                                  ),
                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
@@ -230,7 +237,6 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                                         widget.status ?? 'N/A',
                                         style: const TextStyle(
                                           color: Colors.white,
-
                                           fontSize: 14,
                                         ),
                                       ),
