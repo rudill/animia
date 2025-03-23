@@ -66,20 +66,164 @@ class _DescriptionScreenState extends State<DescriptionScreen>
     super.dispose();
   }
 
-  String convertTime() {
-    if (widget.timeUntilAiring == null) {
-      return 'N/A';
-    }
-    double? timeDays = ((widget.timeUntilAiring! / 60) / 60) / 24;
-    double? timeHours = (widget.timeUntilAiring! / 60) / 60;
-    int timeHoursRounded = timeHours.round();
-    int timeDaysRounded = timeDays.round();
+  // String convertTime() {
+  //   if (widget.timeUntilAiring == null) {
+  //     return 'N/A';
+  //   }
+  //   double? timeDays = ((widget.timeUntilAiring! / 60) / 60) / 24;
+  //   double? timeHours = (widget.timeUntilAiring! / 60) / 60;
+  //   int timeHoursRounded = timeHours.round();
+  //   int timeDaysRounded = timeDays.round();
+  //
+  //   if (timeDaysRounded == 0) {
+  //     return '${timeHoursRounded.toString()} Hours';
+  //   }
+  //
+  //   return '${timeDaysRounded.toString()} Days';
+  // }
+  //
 
-    if (timeDaysRounded == 0) {
-      return '${timeHoursRounded.toString()} Hours';
+  convertTime(bool airStat) {
+    if (airStat == true) {
+      if (widget.timeUntilAiring == null) {
+        return const Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'N/A',
+                    maxLines: 2,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        );
+      }
+      double? timeDays = ((widget.timeUntilAiring! / 60) / 60) / 24;
+      double? timeHours = (widget.timeUntilAiring! / 60) / 60;
+      int timeHoursRounded = timeHours.round();
+      int timeDaysRounded = timeDays.round();
+
+      if (timeDaysRounded == 0) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Ep ${widget.episode.toString()} in',
+                    maxLines: 2,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    '${timeHoursRounded.toString()} Hours',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        );
+      }
+
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Align(
+            alignment: Alignment.center,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Ep ${widget.episode.toString()} in',
+                  maxLines: 2,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                )
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  '${timeDaysRounded.toString()} Days',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      );
+    } else {
+      return const Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Align(
+            alignment: Alignment.center,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Finished',
+                  maxLines: 2,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      );
+    }
+  }
+
+  bool airingStatus() {
+    bool airStats = true;
+    if (widget.status == 'FINISHED') {
+      airStats = false;
     }
 
-    return '${timeDaysRounded.toString()} Days';
+    if (widget.status == 'RELEASING') {
+      airStats = true;
+    }
+
+    return airStats;
   }
 
   String nullCheck() {
@@ -297,44 +441,8 @@ class _DescriptionScreenState extends State<DescriptionScreen>
                     ),
                     Expanded(
                       child: Align(
-                        alignment: Alignment.center,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Align(
-                              alignment: Alignment.center,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'Ep ${widget.episode.toString()} in',
-                                    maxLines: 2,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    convertTime(),
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                          alignment: Alignment.center,
+                          child: convertTime(airingStatus())),
                     ),
                     Expanded(
                       child: Align(

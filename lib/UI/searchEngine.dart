@@ -50,21 +50,21 @@ class _SearchEngineState extends State<SearchEngine> {
     return GraphQLProvider(
       client: ValueNotifier(GraphQLConfig.client()),
       child: Scaffold(
-        // appBar: AppBar(
-        //   title: TextField(
-        //     controller: _searchController,
-        //     decoration: InputDecoration(
-        //       hintText: 'Search Anime',
-        //       suffixIcon: IconButton(
-        //         icon: const Icon(Icons.search),
-        //         onPressed: performSearching,
-        //       ),
-        //     ),
-        //     onSubmitted: (value) {
-        //       performSearching();
-        //     },
-        //   ),
-        // ),
+        appBar: AppBar(
+          title: TextField(
+            controller: _searchController,
+            decoration: InputDecoration(
+              hintText: 'Search Anime',
+              suffixIcon: IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: performSearching,
+              ),
+            ),
+            onSubmitted: (value) {
+              performSearching();
+            },
+          ),
+        ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
@@ -127,7 +127,7 @@ class _SearchEngineState extends State<SearchEngine> {
               Query(
                 options: QueryOptions(
                   document: gql(trendingAnime),
-                  variables: {"page": 1, "perPage": 10},
+                  variables: const {"page": 1, "perPage": 10},
                 ),
                 builder: (QueryResult result, {refetch, fetchMore}) {
                   if (result.isLoading) {
