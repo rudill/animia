@@ -1,4 +1,4 @@
-# Animia
+# ▬▬ι══════ﺤ Animia
 
 Animia is a Flutter application designed to be a customized anime tracker. It allows users to keep track of their favorite anime, view trending anime, and get detailed information about each anime.
 
